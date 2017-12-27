@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Utils {
 
+    // This is an utility function that handles the input from the user
+    // provided that the set of valid input inputs is given
     public static String getInput(String[] options) {
         // Getting an input from the user
         Scanner input = new Scanner(System.in);
