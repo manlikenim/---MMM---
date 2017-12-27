@@ -25,21 +25,28 @@ public class Alien {
         return description;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
     // Start a fight with the given player
     public void fight(Player enemy) {
         if (!metEnemy) {
-            // System.out.println("You are now facing " + );
-            // show the name
-            // show the description
-            // show the stats of the enemy
+            display("You are now facing " + name);
+            display(description);
+            this.metEnemy = true;
         }
         attack(enemy);
     }
 
     // Attack the given player
     public void attack(Player enemy) {
-        // show a line saying the enemy has attacked you
+        display("Alien Stats:");
+        display("Name: " + name + " Health: " + health + " Damage: " + damage);
+
         enemy.takeDamage(damage);
+
+        display(name + " attacked you and dealt a damage of " + damage);
     }
 
     // Decreases the alien's health by taking into account the damage taken
@@ -47,7 +54,16 @@ public class Alien {
         this.health = Math.max(0, health - damage);
     }
 
-    private boolean isAlive() {
+    public boolean isAlive() {
         return health > 0;
+    }
+
+    private void display(String message) {
+        System.out.println(message);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
