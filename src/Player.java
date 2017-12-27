@@ -3,57 +3,19 @@ public class Player {
     //    Health related parameters
     private int currHealth;
     private int maxHealth;
-    private Spacesuit currSpacesuit;
 
     // Damage related parameters
     private int baseDamage;
     private int currDamage;
     private int experience;
-    private Weapon currWeapon;
-
-    // Usable item
-    private Item currItem;
 
     // Current location in the game
     private Location currLocation;
-
-    public Player(int maxHealth, Spacesuit currSpacesuit, int baseDamage,
-                  Weapon currWeapon, Item currItem, Location currLocation) {
-        this.currHealth = maxHealth;
-        this.maxHealth = maxHealth;
-        this.currSpacesuit = currSpacesuit;
-        this.baseDamage = baseDamage;
-        this.currDamage = baseDamage + currWeapon.getDamage();
-        this.currWeapon = currWeapon;
-        this.currItem = currItem;
-        this.currLocation = currLocation;
-    }
-
-    public Spacesuit getCurrSpacesuit() {
-        return currSpacesuit;
-    }
-
-    public void setCurrSpacesuit(Spacesuit currSpacesuit) {
-        this.currSpacesuit = currSpacesuit;
-    }
-
 
     public void setExperience(int experience) {
         this.experience = experience;
     }
 
-
-    public void setCurrWeapon(Weapon currWeapon) {
-        this.currWeapon = currWeapon;
-    }
-
-    public Item getCurrItem() {
-        return currItem;
-    }
-
-    public void setCurrItem(Item currItem) {
-        this.currItem = currItem;
-    }
 
     public Location getCurrLocation() {
         return currLocation;
@@ -77,6 +39,20 @@ public class Player {
     // Checks if the player has any health left
     private boolean isAlive() {
         return currHealth > 0;
+    }
+
+    public void play() {
+        currLocation.showLocation();
+        currLocation.fleeOrFight(this);
+    }
+
+    public void gameOver() {
+        display("You have died! ☠");
+        System.exit(0);
+    }
+
+    private void display(String message){
+        System.out.println(message);
     }
 
 }
