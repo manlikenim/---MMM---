@@ -12,8 +12,8 @@ public class Player {
     // Current location in the game
     private Location currLocation;
 
-    public void setExperience(int experience) {
-        this.experience = experience;
+    public void increaseExperience() {
+        this.experience++;
     }
 
 
@@ -25,9 +25,19 @@ public class Player {
         this.currLocation = currLocation;
     }
 
+    public int getCurrDamage() {
+        return currDamage;
+    }
+
     // Attack the enemy
     public void attack(Alien enemy) {
+        display("Your Stats:");
+        display("Health: " + currHealth + " Damage: " + currDamage);
+
         enemy.takeDamage(currDamage);
+
+        display("You attack " + enemy.getName() +
+                " and dealt a damage of " + currDamage);
     }
 
     // Decreases the player's health by taking into account the damage taken
@@ -37,7 +47,7 @@ public class Player {
     }
 
     // Checks if the player has any health left
-    private boolean isAlive() {
+    public boolean isAlive() {
         return currHealth > 0;
     }
 
@@ -46,12 +56,17 @@ public class Player {
         currLocation.fleeOrFight(this);
     }
 
+    public void gameCompleted() {
+        display("Congratulations! You have successfully completed the game.");
+        System.exit(0);
+    }
+
     public void gameOver() {
         display("You have died! ☠");
         System.exit(0);
     }
 
-    private void display(String message){
+    private void display(String message) {
         System.out.println(message);
     }
 
