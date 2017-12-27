@@ -64,6 +64,10 @@ public class Exit {
         return leadsTo;
     }
 
+    public String getDestinationName() {
+        return leadsTo.getName();
+    }
+
     public int getDirection() {
         return direction;
     }
