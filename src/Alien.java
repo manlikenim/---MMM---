@@ -29,24 +29,14 @@ public class Alien {
         return damage;
     }
 
-    // Start a fight with the given player
-    public void fight(Player enemy) {
-        if (!metEnemy) {
-            display("You are now facing " + name);
-            display(description);
-            this.metEnemy = true;
-        }
-        attack(enemy);
-    }
-
     // Attack the given player
     public void attack(Player enemy) {
-        display("Alien Stats:");
+        display(">>>>>Alien Stats<<<<<");
         display("Name: " + name + " Health: " + health + " Damage: " + damage);
 
         enemy.takeDamage(damage);
 
-        display(name + " attacked you and dealt a damage of " + damage);
+        display(name + " attacked you and dealt a damage of " + damage + ".\n");
     }
 
     // Decreases the alien's health by taking into account the damage taken
