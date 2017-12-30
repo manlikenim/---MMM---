@@ -5,6 +5,27 @@ public class GameWorld {
         this.player = new Player();
     }
 
+    public void showTitle() {
+        // Provide a title to the game
+        Utils.displayStory("......................_______.._______." +
+                "._______......................");
+        Utils.displayStory(".....................(.......)(.......)" +
+                "(.......).....................");
+        Utils.displayStory(".....................|.().().||.().().|" +
+                "|.().().|.....................");
+        Utils.displayStory("._____.._____.._____.|.||.||.||.||.||.|" +
+                "|.||.||.|._____.._____.._____.");
+        Utils.displayStory("(_____)(_____)(_____)|.|(_)|.||.|(_)|.|" +
+                "|.|(_)|.|(_____)(_____)(_____)");
+        Utils.displayStory(".....................|.|...|.||.|...|.|" +
+                "|.|...|.|.....................");
+        Utils.displayStory(".....................|.)...(.||.)...(.|" +
+                "|.)...(.|.....................");
+        Utils.displayStory(".....................|/.....\\||/....." +
+                "\\||/.....\\|.....................");
+        display("");
+    }
+
     public void chooseDifficulty() {
         String choice = "INVALID";
         String[] options = {"1", "EASY", "E", "1. EASY",
@@ -12,7 +33,10 @@ public class GameWorld {
                             "3", "HARD", "3. HARD"};
 
         while (choice.equals("INVALID")) {
-            display("Welcome to Musk's Mission to Mars!");
+            display("...........................................Welcome to " +
+                    "Musk's Mission to Mars!..............................." +
+                    "............");
+            display("");
             display("Please choose a difficulty");
             display("1. Easy");
             display("2. Normal");
@@ -93,6 +117,11 @@ public class GameWorld {
     private void hardGame() {
         // Many locations and strong enemies
     }
+
+    public void startingScene() {
+        // Provide a story behind the mission
+    }
+
 
     public void startGame() {
         player.play();
