@@ -37,19 +37,22 @@ public class Location {
 
     // Show the details of the current location and alien in it
     public void showLocation() {
-        display("You are now in " + name);
-        display("Zip2 reads: " + description);
-        display("\nYou can see an alien. It has a name tag on it. It reads " +
+        Utils.displayStory("You are now in " + name);
+        Utils.displayStory("Zip2 reads: " + description);
+        display("");
+        Utils.displayStory("\nYou can see an alien. It has a name tag on it. It reads " +
                 currAlien.getName() + ".");
-        display("Zalien reads: " + currAlien.getDescription() + "\n");
+        Utils.displayStory("Zalien reads: " + currAlien.getDescription() + "");
+        display("");
     }
 
     // Show the details of the alien in the location
     public void escapeOrFight(Player player) {
         String choice = "INVALID";
         if (isFinalLocation()){
-            display("This is the final location!");
-            display("You have to beat the main boss to complete the game...\n");
+            Utils.displayStory("This is the final location!");
+            Utils.displayStory("You have to beat the main boss to complete the game...");
+            display("");
             beginFight(player);
         } else {
             String[] options = {"FIGHT", "F", "ESCAPE", "E"};
@@ -70,14 +73,14 @@ public class Location {
     private void beginFight(Player player) {
         display("====================FIGHT====================");
         String aliensName = currAlien.getName();
-        display("You are now facing " + aliensName + "!\n");
+        Utils.displayStory("You are now facing " + aliensName + "!\n");
 
         while (player.isAlive()) {
             // Player attacks the alien
             if (currAlien.isAlive()){
                 player.attack(currAlien);
             } else {
-                display("You have defeated " + aliensName + "!");
+                Utils.displayStory("You have defeated " + aliensName + "!");
                 player.increaseExperience();
                 display("=============================================\n");
 
@@ -106,14 +109,15 @@ public class Location {
 
     // Move on to the next location
     private void escape(Player player) {
-        display("You have chosen to escape!");
+        Utils.displayStory("You have chosen to escape!");
+        display("");
         changeLocation(player);
     }
 
     private void changeLocation(Player player){
         String choice = "INVALID";
         while (choice.equals("INVALID")) {
-            display("The available exists are:");
+            Utils.displayStory("The available exists are:");
 
             // Iterating through available exists and showing them to the user
             // for input
@@ -126,12 +130,13 @@ public class Location {
                 options.add(currExit.getDirectionName());
                 options.add(currExit.getShortDirectionName());
 
-                display(currExit.getDirectionName() + " leading to " +
+                Utils.displayStory(currExit.getDirectionName() + " leading to " +
                         currExit.getLeadsTo());
             }
             choice = Utils.getInput(options.toArray(new String[options.size()
                     ]));
         }
+        display("");
 
         // Iterating through the lists of exits to find the one chosen by the
         // user
@@ -139,8 +144,9 @@ public class Location {
             Location nextLocation = currExit.getLeadsTo();
             if (choice.equals(currExit.getDirectionName()) ||
                     choice.equals(currExit.getShortDirectionName())) {
-                display("You chose to go " + currExit.getDirectionName() + ".");
-                display("You have now left " + name + ".\n");
+                Utils.displayStory("You chose to go " + currExit.getDirectionName() + ".");
+                Utils.displayStory("You have now left " + name + ".");
+                display("");
                 player.setCurrLocation(nextLocation);
                 break;
             }

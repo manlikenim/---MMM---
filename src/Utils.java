@@ -1,4 +1,6 @@
+import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Utils {
 
@@ -36,6 +38,51 @@ public class Utils {
         display("Huh? Invalid command!");
         display("");
         return "INVALID";
+    }
+
+    public static void displayStory (String description)
+    {
+        int width = 80;
+        PrintStream output = new PrintStream(System.out);
+
+        // Start at zero
+        int currentWidth =  0;
+
+        // Create a string tokenizer object
+        StringTokenizer tokenizer = new StringTokenizer ( description );
+
+        // Continue till there are words in the string
+        while ( tokenizer.hasMoreTokens() )
+        {
+            // Get a word
+            String token = tokenizer.nextToken();
+
+            // Print on the new line if the current word exceeds the width
+            if (currentWidth + token.length() >= width)
+            {
+                // Print a newline
+                output.println ();
+                currentWidth = 0;
+            }
+
+            // Print token
+            String fullToken = token + " ";
+
+            // Create a delay in printing characters
+            for (char currentChar: fullToken.toCharArray()) {
+                output.print(currentChar);
+                try {
+                    Thread.sleep(40);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Update the currentWidth to include the fullToken
+            currentWidth += fullToken.length();
+        }
+        output.println();
+        output.flush();
     }
 
     private static void display(String message){
