@@ -35,30 +35,30 @@ public class Location {
         return exits.size() == 0;
     }
 
-    // Show the details of the current location
+    // Show the details of the current location and alien in it
     public void showLocation() {
         display("You are now in " + name);
-        display(description);
-        display("You can see an alien. It has a name tag on it. It reads " +
-                currAlien.getName());
+        display("Zip2 reads: " + description);
+        display("\nYou can see an alien. It has a name tag on it. It reads " +
+                currAlien.getName() + ".");
+        display("Zalien reads: " + currAlien.getDescription() + "\n");
     }
-    // Show the details of the alien in the location
 
-    public void fleeOrFight(Player player) {
+    // Show the details of the alien in the location
+    public void escapeOrFight(Player player) {
         String choice = "INVALID";
         if (isFinalLocation()){
             display("This is the final location!");
-            display("You have to beat the main boss to complete the game...");
+            display("You have to beat the main boss to complete the game...\n");
             beginFight(player);
         } else {
-            String[] options = {"FIGHT", "FLEE"};
+            String[] options = {"FIGHT", "F", "ESCAPE", "E"};
             while (choice.equals("INVALID")) {
-                display("Do you want to fight " + currAlien.getName() + " or flee to " +
-                        "the next location?");
+                display("Do you want to FIGHT " + currAlien.getName() +
+                        " or ESCAPE to the next location?");
                 choice = Utils.getInput(options);
             }
-            if (choice.equals("FIGHT")) {
-                display("You are now");
+            if (choice.equals("FIGHT") || choice.equals("F")) {
                 beginFight(player);
             } else {
                 flee(player);
@@ -68,7 +68,10 @@ public class Location {
     // Start the fight between the alien and the player
 
     private void beginFight(Player player) {
+        display("====================FIGHT====================");
         String aliensName = currAlien.getName();
+        display("You are now facing " + aliensName + "!\n");
+
         while (player.isAlive()) {
             // Player attacks the alien
             if (currAlien.isAlive()){
@@ -76,17 +79,24 @@ public class Location {
             } else {
                 display("You have defeated " + aliensName + "!");
                 player.increaseExperience();
+                display("=============================================\n");
+
 
                 if (isFinalLocation()) {
                     player.gameCompleted();
+                } else {
+                    changeLocation(player);
                 }
                 break;
             }
 
-            // Alien attacks the player
-            if (player.isAlive()){
-                currAlien.fight(player);
-            } else {
+            // Alien attacks the player if both are still alive
+            if (currAlien.isAlive() & player.isAlive()){
+                currAlien.attack(player);
+            }
+
+            // Game is over if the player is no longer alive
+            if (!player.isAlive()) {
                 player.gameOver();
                 break;
             }
@@ -96,9 +106,13 @@ public class Location {
 
     // Move on to the next location
     private void flee(Player player) {
+        display("You have chosen to flee!");
+        changeLocation(player);
+    }
+
+    private void changeLocation(Player player){
         String choice = "INVALID";
         while (choice.equals("INVALID")) {
-            display("You have chosen to flee!");
             display("The available exists are:");
 
             // Iterating through available exists and showing them to the user
@@ -115,7 +129,8 @@ public class Location {
                 display(currExit.getDirectionName() + " leading to " +
                         currExit.getLeadsTo());
             }
-            choice = Utils.getInput(((String[]) options.toArray()));
+            choice = Utils.getInput(options.toArray(new String[options.size()
+                    ]));
         }
 
         // Iterating through the lists of exits to find the one chosen by the
@@ -124,8 +139,8 @@ public class Location {
             Location nextLocation = currExit.getLeadsTo();
             if (choice.equals(currExit.getDirectionName()) ||
                     choice.equals(currExit.getShortDirectionName())) {
-                display("You chose to go " + currExit.getDirectionName());
-                display("You have now left " + name);
+                display("You chose to go " + currExit.getDirectionName() + ".");
+                display("You have now left " + name + ".\n");
                 player.setCurrLocation(nextLocation);
                 break;
             }
