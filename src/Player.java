@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Player {
 
     //    Health related parameters
@@ -11,6 +13,24 @@ public class Player {
 
     // Current location in the game
     private Location currLocation;
+
+    public Player() {
+        this.currHealth = 100;
+        this.maxHealth = 100;
+        this.baseDamage = 10;
+        this.currDamage = 10;
+        this.experience = 1;
+        this.currLocation = null;
+    }
+
+    public Player(int maxHealth, int baseDamage, Location currLocation) {
+        this.currHealth = maxHealth;
+        this.maxHealth = maxHealth;
+        this.baseDamage = baseDamage;
+        this.currDamage = baseDamage;
+        this.experience = 1;
+        this.currLocation = currLocation;
+    }
 
     public void increaseExperience() {
         this.experience++;
@@ -31,13 +51,13 @@ public class Player {
 
     // Attack the enemy
     public void attack(Alien enemy) {
-        display("Your Stats:");
+        display("=====Your Stats=====");
         display("Health: " + currHealth + " Damage: " + currDamage);
 
         enemy.takeDamage(currDamage);
 
-        display("You attack " + enemy.getName() +
-                " and dealt a damage of " + currDamage);
+        display("You attacked " + enemy.getName() +
+                " and dealt a damage of " + currDamage + ".");
     }
 
     // Decreases the player's health by taking into account the damage taken
@@ -53,7 +73,7 @@ public class Player {
 
     public void play() {
         currLocation.showLocation();
-        currLocation.fleeOrFight(this);
+        currLocation.escapeOrFight(this);
     }
 
     public void gameCompleted() {
