@@ -85,6 +85,7 @@ public class Utils {
         output.flush();
     }
 
+    // Helper function to ease printing
     private static void display(String message){
         System.out.println(message);
     }

@@ -156,6 +156,8 @@ public class Location {
         player.play();
     }
 
+
+    // Helper function to ease printing
     private void display(String message){
         System.out.println(message);
     }

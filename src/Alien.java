@@ -48,6 +48,7 @@ public class Alien {
         return health > 0;
     }
 
+    // Helper function to ease printing
     private void display(String message) {
         System.out.println(message);
     }

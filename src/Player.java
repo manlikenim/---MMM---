@@ -14,6 +14,7 @@ public class Player {
     // Current location in the game
     private Location currLocation;
 
+    // Trivial constructor without a location
     public Player() {
         this.currHealth = 100;
         this.maxHealth = 100;
@@ -23,6 +24,7 @@ public class Player {
         this.currLocation = null;
     }
 
+    // Non-trivial constructor where all the parameters are provided
     public Player(int maxHealth, int baseDamage, Location currLocation) {
         this.currHealth = maxHealth;
         this.maxHealth = maxHealth;
@@ -32,21 +34,15 @@ public class Player {
         this.currLocation = currLocation;
     }
 
+    // Increase player's experience after defeating an enemy
     public void increaseExperience() {
         this.experience++;
     }
 
 
-    public Location getCurrLocation() {
-        return currLocation;
-    }
-
+    // Change the player's location
     public void setCurrLocation(Location currLocation) {
         this.currLocation = currLocation;
-    }
-
-    public int getCurrDamage() {
-        return currDamage;
     }
 
     // Attack the enemy
@@ -76,16 +72,19 @@ public class Player {
         currLocation.escapeOrFight(this);
     }
 
+    // Shown at the end of the game's completion
     public void gameCompleted() {
         display("Congratulations! You have successfully completed the game.");
         System.exit(0);
     }
 
+    // Shown when the player dies
     public void gameOver() {
         display("You have died! ☠");
         System.exit(0);
     }
 
+    // Helper function to ease printing
     private void display(String message) {
         System.out.println(message);
     }
