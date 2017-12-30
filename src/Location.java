@@ -61,7 +61,7 @@ public class Location {
             if (choice.equals("FIGHT") || choice.equals("F")) {
                 beginFight(player);
             } else {
-                flee(player);
+                escape(player);
             }
         }
     }
@@ -105,8 +105,8 @@ public class Location {
     }
 
     // Move on to the next location
-    private void flee(Player player) {
-        display("You have chosen to flee!");
+    private void escape(Player player) {
+        display("You have chosen to escape!");
         changeLocation(player);
     }
 
