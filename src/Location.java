@@ -40,9 +40,10 @@ public class Location {
         Utils.displayStory("You are now in " + name);
         Utils.displayStory("Zip2 reads: " + description);
         display("");
-        Utils.displayStory("\nYou can see an alien. It has a name tag on it. It reads " +
-                currAlien.getName() + ".");
-        Utils.displayStory("Zalien reads: " + currAlien.getDescription() + "");
+        Utils.displayStory("You can see an alien. It has a name " +
+                "tag on it. It reads " +  currAlien.getName() + ".");
+        Utils.displayStory("Zalien reads: " +
+                            currAlien.getDescription() + "");
         display("");
     }
 
@@ -51,7 +52,8 @@ public class Location {
         String choice = "INVALID";
         if (isFinalLocation()){
             Utils.displayStory("This is the final location!");
-            Utils.displayStory("You have to beat the main boss to complete the game...");
+            Utils.displayStory("You have to beat the main boss to " +
+                    "           complete the game...");
             display("");
             beginFight(player);
         } else {
@@ -71,26 +73,31 @@ public class Location {
     // Start the fight between the alien and the player
 
     private void beginFight(Player player) {
-        display("====================FIGHT====================");
+        display("======================================FIGHT===============" +
+                "======================");
         String aliensName = currAlien.getName();
-        Utils.displayStory("You are now facing " + aliensName + "!\n");
+        Utils.displayStory("You are now facing " +
+                            aliensName + "!\n");
 
         while (player.isAlive()) {
             // Player attacks the alien
             if (currAlien.isAlive()){
                 player.attack(currAlien);
             } else {
-                Utils.displayStory("You have defeated " + aliensName + "!");
+                Utils.displayStory("You have defeated " +
+                                    aliensName + "!");
                 player.increaseExperience();
-                display("=============================================\n");
+                display("===================================================" +
+                        "=============================\n");
 
 
+                // Jump to the end scene one final location has been cleared
+                // else go to the next location
                 if (isFinalLocation()) {
                     player.gameCompleted();
                 } else {
                     changeLocation(player);
                 }
-                break;
             }
 
             // Alien attacks the player if both are still alive
@@ -101,7 +108,6 @@ public class Location {
             // Game is over if the player is no longer alive
             if (!player.isAlive()) {
                 player.gameOver();
-                break;
             }
             display("");
         }
@@ -130,8 +136,8 @@ public class Location {
                 options.add(currExit.getDirectionName());
                 options.add(currExit.getShortDirectionName());
 
-                Utils.displayStory(currExit.getDirectionName() + " leading to " +
-                        currExit.getLeadsTo());
+                Utils.displayStory(currExit.getDirectionName() +
+                                    " leading to " + currExit.getLeadsTo());
             }
             choice = Utils.getInput(options.toArray(new String[options.size()
                     ]));
@@ -144,7 +150,8 @@ public class Location {
             Location nextLocation = currExit.getLeadsTo();
             if (choice.equals(currExit.getDirectionName()) ||
                     choice.equals(currExit.getShortDirectionName())) {
-                Utils.displayStory("You chose to go " + currExit.getDirectionName() + ".");
+                Utils.displayStory("You chose to go " +
+                                    currExit.getDirectionName() + ".");
                 Utils.displayStory("You have now left " + name + ".");
                 display("");
                 player.setCurrLocation(nextLocation);
