@@ -43,6 +43,7 @@ public class Utils {
     public static void displayStory (String description)
     {
         int width = 80;
+        int interval = 40;
         PrintStream output = new PrintStream(System.out);
 
         // Start at zero
@@ -72,7 +73,7 @@ public class Utils {
             for (char currentChar: fullToken.toCharArray()) {
                 output.print(currentChar);
                 try {
-                    Thread.sleep(40);
+                    Thread.sleep(interval);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
