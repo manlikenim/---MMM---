@@ -42,8 +42,12 @@ public class Utils {
 
     public static void displayStory (String description)
     {
-        int width = 80;
+        // Parameter to control the speed of text on the output
         int interval = 40;
+
+        // Parameter to control the width on the output
+        int width = 80;
+
         PrintStream output = new PrintStream(System.out);
 
         // Start at zero
